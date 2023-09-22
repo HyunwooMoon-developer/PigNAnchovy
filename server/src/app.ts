@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -9,17 +9,17 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { expressMiddleware } from '@apollo/server/express4';
-import { GraphQLSchema } from 'graphql';
-import Query from './gql/querys';
-import Mutation from './gql/mutation';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import typeDefs from './gql/typeDef';
+import resolvers from './gql/resolvers';
 
 dotenv.config();
 
 const port = process.env.PORT || 5000;
 
-const schema = new GraphQLSchema({
-  query: Query,
-  mutation: Mutation,
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
 });
 
 const app = express();

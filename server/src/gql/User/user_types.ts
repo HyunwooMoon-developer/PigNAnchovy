@@ -1,26 +1,38 @@
-import {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLInputObjectType,
-  GraphQLNonNull,
-} from 'graphql/type';
+import { gql } from 'graphql-tag';
 
-export const UserType = new GraphQLObjectType({
-  name: 'UserType',
-  fields: () => ({
-    _id: { type: GraphQLString },
-    username: { type: GraphQLString },
-    password: { type: GraphQLString },
-    role: { type: GraphQLInt },
-  }),
-});
+const User_Type = gql`
+  type User {
+    _id: ID!
+    username: String!
+    password: String!
+    role: Int!
+  }
 
-export const UserInput = new GraphQLInputObjectType({
-  name: 'UserInput',
-  fields: () => ({
-    username: { type: new GraphQLNonNull(GraphQLString) },
-    password: { type: new GraphQLNonNull(GraphQLString) },
-    role: { type: new GraphQLNonNull(GraphQLInt) },
-  }),
-});
+  type Query {
+    Users(
+      filter: UserFilter
+      page: Int
+      perPage: Int
+      sortField: String
+      sortOrder: String
+    ): [User!]!
+
+    User(_id: ID!): User!
+  }
+
+  type Mutation {
+    createUser(input: UserInput): User!
+  }
+
+  input UserInput {
+    username: String!
+    password: String!
+    role: Int!
+  }
+
+  input UserFilter {
+    role: Int!
+  }
+`;
+
+export default User_Type;
