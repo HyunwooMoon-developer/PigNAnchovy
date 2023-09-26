@@ -11,7 +11,7 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
-      maxlength: [20, 'Password must less or equal than 20 character'],
+      maxlength: [60, 'Password must less or equal than 60 character'],
       minlength: [6, 'Password must greater or equal than 6 characters'],
     },
     role: {

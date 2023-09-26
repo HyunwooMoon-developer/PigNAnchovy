@@ -17,16 +17,24 @@ const User_Type = gql`
       sortOrder: String
     ): [User!]!
 
-    User(_id: ID!): User!
+    User(id: ID!): User!
   }
 
   type Mutation {
     createUser(input: UserInput): User!
+
+    updateUser(id: ID!, input: UserInput): User!
+
+    resetPassword(
+      id: ID!
+      originalPassword: String!
+      newPassword: String!
+    ): SuccessResult!
   }
 
   input UserInput {
     username: String!
-    password: String!
+    password: String
     role: Int!
   }
 

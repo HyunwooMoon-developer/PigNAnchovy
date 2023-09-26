@@ -3,11 +3,7 @@ import User_Model from '../../models/user_models';
 
 const User_Query = {
   Query: {
-    Users: async (
-      src: any,
-      args: any,
-      context: any
-    ): Promise<Array<UserInterface>> => {
+    Users: async (src: any, args: any): Promise<Array<UserInterface>> => {
       let users: Array<UserInterface> = [];
 
       try {
@@ -18,7 +14,7 @@ const User_Query = {
 
       return users;
     },
-    User: async (src: any, args: any, context: any): Promise<UserInterface> => {
+    User: async (src: any, args: any): Promise<UserInterface> => {
       let user: UserInterface;
 
       try {

@@ -5,6 +5,10 @@ const misc_Schema = gql`
   scalar Date
 
   scalar DateTime
+
+  type SuccessResult {
+    success: Boolean
+  }
 `;
 
 const typeDefs = [misc_Schema, User_Type];
